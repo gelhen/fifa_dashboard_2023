@@ -3,6 +3,11 @@ import webbrowser
 import pandas as pd
 from datetime import datetime 
 
+# verifica se o dataframe está no estado da sessão
+# se não estiver, lê o arquivo csv e filtra os dados
+# e salva no estado da sessão
+# isso permite que o dataframe seja carregado apenas uma vez e não seja recarregado a cada refresh da pagina
+# e pode ser reutilizado em outras paginas
 if "data" not in st.session_state:
     df_data = pd.read_csv("datasets/CLEAN_FIFA23_official_data.csv", index_col=0)
     df_data = df_data[df_data["Contract Valid Until"] >= datetime.today().year]
@@ -10,12 +15,14 @@ if "data" not in st.session_state:
     df_data = df_data.sort_values(by="Overall", ascending=False)
     st.session_state["data"] = df_data
 
+# cria o titulo da pagina
 st.markdown("# FIFA23 OFFICIAL DATASET! ⚽️")
 st.sidebar.markdown("Desenvolvido por [Asimov Academy](https://asimov.academy)")
 
-
+# cria um botão para acessar os dados no Kaggle 
 btn = st.button("Acesse os dados no Kaggle")
 if btn:
+    # abre o navegador e acessa a url do Kaggle
     webbrowser.open_new_tab("https://www.kaggle.com/datasets/kevwesophia/fifa23-official-datasetclean-data")
 
 st.markdown(
