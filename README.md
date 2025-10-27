@@ -6,3 +6,8 @@ streamlit run 1_🏠_home.py
 
 # Ordem dos arquivos de pagina
 O streamlit pede para incluir um numero underscore e o nome da pagina
+
+
+# Link do app
+
+https://fifa2023-gelhen.streamlit.app/
